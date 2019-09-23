@@ -78,4 +78,34 @@ public class MainActivity extends AppCompatActivity {
         animRotateLeft = AnimationUtils.loadAnimation(this, R.anim.rotate_left);
         animRotateRight = AnimationUtils.loadAnimation(this, R.anim.rotate_right);
     }
+
+    private void loadUI() {
+        mImageView = (ImageView) findViewById(R.id.imageView);
+        mTextView = (TextView) findViewById(R.id.textStatus);
+        btnFadeIn = (Button) findViewById(R.id.btnFadeIn);
+        btnFadeOut = (Button) findViewById(R.id.btnFadeOut);
+        btnFadeInOut = (Button) findViewById(R.id.btnFadeInOut);
+        btnZoomIn = (Button) findViewById(R.id.btnZoomIn);
+        btnZoomOut = (Button) findViewById(R.id.btnZoomOut);
+        btnLeftRight = (Button) findViewById(R.id.btnLeftRight);
+        btnRightLeft = (Button) findViewById(R.id.btnRightLeft);
+        btnTopBot = (Button) findViewById(R.id.btnTopBot);
+        btnBounce = (Button) findViewById(R.id.btnBounce);
+        btnFlash = (Button) findViewById(R.id.btnFlash);
+        btnRotateLeft = (Button) findViewById(R.id.btnRotateLeft);
+        btnRotateRight = (Button) findViewById(R.id.btnRotateRight);
+
+        btnFadeIn.setOnClickListener(this);
+        btnFadeOut.setOnClickListener(this);
+        btnFadeInOut.setOnClickListener(this);
+        btnZoomIn.setOnClickListener(this);
+        btnZoomOut.setOnClickListener(this);
+        btnLeftRight.setOnClickListener(this);
+        btnRightLeft.setOnClickListener(this);
+        btnTopBot.setOnClickListener(this);
+        btnBounce.setOnClickListener(this);
+        btnFlash.setOnClickListener(this);
+        btnRotateLeft.setOnClickListener(this);
+        btnRotateRight.setOnClickListener(this);
+    }
 }

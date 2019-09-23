@@ -3,6 +3,7 @@ package com.gda.animationsdemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -10,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+implements View.OnClickListener, Animation.AnimationListener {
 
     Animation animFadeIn;
     Animation animFadeOut;
@@ -107,5 +109,115 @@ public class MainActivity extends AppCompatActivity {
         btnFlash.setOnClickListener(this);
         btnRotateLeft.setOnClickListener(this);
         btnRotateRight.setOnClickListener(this);
+
+        mSeekBarSpeed = (SeekBar) findViewById(R.id.seekBarSpeed);
+        mTextSpeed = (TextView) findViewById(R.id.textSeekerSpeed);
+
+        mSeekBarSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                seekBarProgress = i;
+                mTextSpeed.setText("" + i + " of " + mSeekBarSpeed.getMax());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.btnFadeIn:
+                animFadeIn.setDuration(seekBarProgress);
+                animFadeIn.setAnimationListener(this);
+                mImageView.startAnimation(animFadeIn);
+                break;
+            case R.id.btnFadeOut:
+                animFadeOut.setDuration(seekBarProgress);
+                animFadeOut.setAnimationListener(this);
+                mImageView.startAnimation(animFadeOut);
+                break;
+            case R.id.btnFadeInOut:
+                animFadeInOut.setDuration(seekBarProgress);
+                animFadeInOut.setAnimationListener(this);
+                mImageView.startAnimation(animFadeInOut);
+                break;
+            case R.id.btnZoomIn:
+                animZoomIn.setDuration(seekBarProgress);
+                animZoomIn.setAnimationListener(this);
+                mImageView.startAnimation(animZoomIn);
+                break;
+            case R.id.btnZoomOut:
+                animZoomOut.setDuration(seekBarProgress);
+                animZoomOut.setAnimationListener(this);
+                mImageView.startAnimation(animZoomOut);
+                break;
+            case R.id.btnLeftRight:
+                animLeftRight.setDuration(seekBarProgress);
+                animLeftRight.setAnimationListener(this);
+                mImageView.startAnimation(animLeftRight);
+                break;
+            case R.id.btnRightLeft:
+                animRightLeft.setDuration(seekBarProgress);
+                animRightLeft.setAnimationListener(this);
+                mImageView.startAnimation(animRightLeft);
+                break;
+            case R.id.btnTopBot:
+                animTopBot.setDuration(seekBarProgress);
+                animTopBot.setAnimationListener(this);
+                mImageView.startAnimation(animTopBot);
+                break;
+            case R.id.btnBounce:
+/*
+Divide seekBarProgress by 10 because with
+the seekbar having a max value of 5000 it
+will make the animations range between
+almost instant and half a second
+5000 / 10 = 500 milliseconds
+*/
+                animBounce.setDuration(seekBarProgress / 10);
+                animBounce.setAnimationListener(this);
+                mImageView.startAnimation(animBounce);
+                break;
+            case R.id.btnFlash:
+                animFlash.setDuration(seekBarProgress / 10);
+                animFlash.setAnimationListener(this);
+                mImageView.startAnimation(animFlash);
+                break;
+            case R.id.btnRotateLeft:
+                animRotateLeft.setDuration(seekBarProgress);
+                animRotateLeft.setAnimationListener(this);
+                mImageView.startAnimation(animRotateLeft);
+                break;
+            case R.id.btnRotateRight:
+                animRotateRight.setDuration(seekBarProgress);
+                animRotateRight.setAnimationListener(this);
+                mImageView.startAnimation(animRotateRight);
+                break;
+        }
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+        mTextView.setText("RUNNING");
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        mTextView.setText("STOPPED");
     }
 }
